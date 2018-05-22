@@ -11,13 +11,32 @@
     <body>
         <div class="app">
             <h1>Apache Cordova</h1>
+
             <div id="post" ng-controller="post">
                 <h3>{{post.title}}</h3>
                 <p>{{post.htmlText}}</p>
-                <button ng-click="Previous()">PREV POST</button>
-                <button ng-click="Next()">NEXT POST</button>
+
+                <button ng-click="PreviousPage()">PREV POST</button>
+                <button ng-click="NextPage()">NEXT POST</button>
+
+                <!-- COMMENTS LIST -->
+                <div id="comments">
+                    <h4>Comments:</h4>
+                    <div ng-repeat="comment in comments" class="comment">
+                        {{comment.commentText}}
+                    </div>
+                </div>
+
+                <!-- ADD COMMENT AREA -->
+                <div>
+                    <h4>Add your comment</h4>
+                    <textarea id="commentArea" cols="40" rows="3"></textarea><br>
+                    <div id="commentErrorMessage"></div>
+                    <button ng-click="AddComment()">Submit</button>
+                </div>
             </div>
         </div>
+
         <script type="text/javascript" src="cordova.js"></script>
         <script type="text/javascript" src="js/angular.min.js"></script>
         <script type="text/javascript" src="js/index.js"></script>
