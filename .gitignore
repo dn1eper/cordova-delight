@@ -2,3 +2,4 @@ build/
 platforms/
 mobile/plugins
 mobile/node_modules
+mobile/www
