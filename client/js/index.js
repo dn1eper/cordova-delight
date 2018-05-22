@@ -1,6 +1,4 @@
-const HOST = "http://192.168.1.12:/0/";
-//const HOST = "http://localhost:80/"
-var app = angular.module('app', []);
+HOST = "http://192.168.1.12/server/";
 
 app.controller('post', ($scope, $http) => {
     var post_id = 0;
@@ -10,7 +8,7 @@ app.controller('post', ($scope, $http) => {
         headers: {'Access-Control-Allow-Origin' : "*"}} )
     .then(res => $scope.post = res.data,
         err => console.error(err));
-    
+
     $scope.Previous = () => $http.get(HOST + 'post.php?post_id='+ (--post_id), {
         headers: {'Access-Control-Allow-Origin' : "*"}} )
     .then(res => $scope.post = res.data,
