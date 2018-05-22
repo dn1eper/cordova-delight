@@ -1,23 +1,21 @@
-var app = {
-    initialize: function() {
-        document.addEventListener('deviceready', this.onDeviceReady.bind(this), false);
-    },
+HOST = "http://192.168.1.12/";
 
-    onDeviceReady: function() {
-        this.receivedEvent('deviceready');
-    },
+document.addEventListener('deviceready', function() {
+    
+    var app = angular.module('myCordovaApp', []);
+    var post_id = 0;
 
-    // Update DOM on a Received Event
-    receivedEvent: function(id) {
-        var parentElement = document.getElementById(id);
-        var listeningElement = parentElement.querySelector('.listening');
-        var receivedElement = parentElement.querySelector('.received');
+    app.controller('post', ($scope, $http) => {
+        $scope.Next = () => $http.get(HOST + 'post.php?post_id='+ (++post_id))
+        .then(res => $scope.post = res.data,
+            err => console.error(err));
+        
+        $scope.Previous = () => $http.get(HOST + 'post.php?post_id='+ (--post_id))
+        .then(res => $scope.post = res.data,
+            err => console.error(err));
+    });
 
-        listeningElement.setAttribute('style', 'display:none;');
-        receivedElement.setAttribute('style', 'display:block;');
-
-        console.log('Received Event: ' + id);
-    }
-};
-
-app.initialize();
+    document.bind('swiperight', Next);
+    document.bind('swipeleft', Previous);
+}, false);
+    
