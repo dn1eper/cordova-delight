@@ -1,4 +1,4 @@
-HOST = "http://192.168.1.12/server/";
+HOST = "http://192.168.0.101:80/server/";
 
 app.controller('post', ($scope, $http) => {
     var post_id = 0;
