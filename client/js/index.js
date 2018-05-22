@@ -78,29 +78,17 @@ app.controller('post', ($scope, $http) => {
 });
 
 
-
 function onLoad() {
-    /*document.addEventListener('swiperight', onSwipeRight, false);
+    // TODO: ???
+    /*
+    document.addEventListener('swiperight', onSwipeRight, false);
     document.addEventListener('swipeleft', onSwipeLeft, false);
-    document.addEventListener('onclick', onClick, false);*/
+    document.addEventListener('onclick', onClick, false);
 
     post.bind("swipeleft", onSwipeLeft);
     post.bind("swipeleft", onSwipeRight);
     post.bind("click", onClick);
+    */
 }
-
-function onSwipeRight() {
-    post.innerHTML = "right";
-}
-
-function onSwipeLeft() {
-    post.innerHTML = "left";
-}
-
-function onClick() {
-    post.innerHTML = "click";
-}
-
 
 document.addEventListener('deviceready', onLoad, false);
-//onLoad();
