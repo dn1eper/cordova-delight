@@ -1,5 +1,5 @@
 HOST = "http://192.168.0.101:80/server/";
-
+var app = angular.module('app', []);
 app.controller('post', ($scope, $http) => {
     var post_id = 0;
 
