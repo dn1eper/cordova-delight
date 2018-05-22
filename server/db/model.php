@@ -5,7 +5,7 @@ class Model {
 
 	function __construct() {
 		// Connect to the database
-		$this->mysqli = new mysqli("localhost", "root", "", "cordova-app");
+		$this->mysqli = new mysqli("localhost", "root", "", "cordova");
 		if ($this->mysqli->connect_error) return false;
 		else return true;
 	}
@@ -14,11 +14,11 @@ class Model {
     }
 	
 	function get_post($post_id) {
-		return $this->mysqli->query("SELECT * FROM post WHERE post_id = '{$post_id}'")->fetch_object();
+		return (array)$this->mysqli->query("SELECT * FROM post WHERE post_id = '{$post_id}'")->fetch_object();
 	}
 
 	function get_comments($post_id) {
-		return $this->mysqli->query("SELECT * FROM comment WHERE post_id = '{$post_id}'")->fetch_object();
+		return $this->mysqli->query("SELECT * FROM comment WHERE post_id = '{$post_id}'")->fetch_all(MYSQLI_ASSOC);
 	}
 
 	function add_comment($post_id, $text) {
