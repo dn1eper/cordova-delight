@@ -5,20 +5,21 @@ var app = angular.module('app', []);
 app.controller('post', ($scope, $http) => {
     var post_id = 0;
 
+    function initialize(post) {
+        $scope.post = post;
+        $scope.GetComments();
+        $scope.hideErrorMessage();
+    }
+
     $scope.NextPage = () => {
         $http.get(
             HOST + 'post.php?post_id=' + (++post_id), {
             headers: {'Access-Control-Allow-Origin' : "*"}} )
         .then(res => {
                 if (res.data.length == 0) post_id--;
-                else {
-                    $scope.post = res.data;
-                    $scope.GetComments();
-                    $scope.hideErrorMessage();
-                }
+                else initialize(res.data);
             },
             err => console.error(err));
-        
     };
 
     $scope.PreviousPage = () => {
@@ -56,20 +57,36 @@ app.controller('post', ($scope, $http) => {
             commentErrorMessage.innerHTML = "Your comment must be at least five characters long";
             commentErrorMessage.setAttribute('style', 'display:block;');
         }
-    }
+    };
 
     $scope.hideErrorMessage = () => {
         commentErrorMessage.setAttribute('style', 'display:none;');
+    };
+
+    $scope.Like = () => {
+        $http.get(
+            HOST + 'like.php?post_id=' + post_id, {
+            headers: {'Access-Control-Allow-Origin' : "*"}} )
+        .then(res => {
+                // TODO: recive adding status
+                $scope.post.likes++;
+            },
+            err => console.error(err));
     }
 
     $scope.NextPage();
 });
 
 
+
 function onLoad() {
-    document.addEventListener('swiperight', onSwipeRight, false);
+    /*document.addEventListener('swiperight', onSwipeRight, false);
     document.addEventListener('swipeleft', onSwipeLeft, false);
-    document.addEventListener('onclick', onClick, false);
+    document.addEventListener('onclick', onClick, false);*/
+
+    post.bind("swipeleft", onSwipeLeft);
+    post.bind("swipeleft", onSwipeRight);
+    post.bind("click", onClick);
 }
 
 function onSwipeRight() {

@@ -15,10 +15,16 @@
             <div id="post" ng-controller="post">
                 <h3>{{post.title}}</h3>
                 <p>{{post.htmlText}}</p>
+                
+                <!-- LIKES -->
+                <button ng-click="Like()"><img src="img/like.svg" alt="like">{{post.likes}}</button>
 
-                <button ng-click="PreviousPage()">PREV POST</button>
-                <button ng-click="NextPage()">NEXT POST</button>
-
+                <!-- NAVIGATION BUTTONS -->
+                <p>
+                    <button ng-click="PreviousPage()">PREV POST</button>
+                    <button ng-click="NextPage()">NEXT POST</button>        
+                </p>
+                
                 <!-- COMMENTS LIST -->
                 <div id="comments">
                     <h4>Comments:</h4>
